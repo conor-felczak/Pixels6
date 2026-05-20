@@ -136,9 +136,16 @@ debug_color = Color(0.40784314, 0.015686275, 0.6784314, 1)
 [node name="actionAnimator" type="AnimationPlayer" parent="animationPLayers" unique_id=1913648990]
 root_node = NodePath("../..")
 
+[node name="timers" type="Node" parent="." unique_id=60241050]
+
+[node name="blockTimer" type="Timer" parent="timers" unique_id=1799992555]
+wait_time = 0.5
+autostart = true
+
 [connection signal="body_entered" from="limbsAreas/body" to="." method="_on_body_body_entered"]
 [connection signal="body_entered" from="limbsAreas/leftArm" to="." method="_on_left_arm_body_entered"]
 [connection signal="body_entered" from="limbsAreas/rightArm" to="." method="_on_right_arm_body_entered"]
 [connection signal="body_entered" from="limbsAreas/leftLeg" to="." method="_on_left_leg_body_entered"]
 [connection signal="body_entered" from="limbsAreas/rightLeg" to="." method="_on_right_leg_body_entered"]
 [connection signal="body_entered" from="limbsAreas/up" to="." method="_on_up_body_entered"]
+[connection signal="timeout" from="timers/blockTimer" to="." method="_on_block_timer_timeout"]

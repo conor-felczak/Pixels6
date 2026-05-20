@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta):
 	
-	print(spearBlock.name)
+	#print(spearBlock.name)
 	
 	if lockedOn:
 		if combatTriangle.topRightActive:
