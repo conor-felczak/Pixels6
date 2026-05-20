@@ -1,0 +1,392 @@
+[gd_scene format=3 uid="uid://c32ix4c3rjajc"]
+
+[ext_resource type="Script" uid="uid://bi1lq6y3gf7gw" path="res://scripts/player.gd" id="1_tou0u"]
+[ext_resource type="Script" uid="uid://c7os0sf880kp5" path="res://scripts/characterAiming.gd" id="2_8cdkg"]
+[ext_resource type="PackedScene" uid="uid://cghaeypt67txe" path="res://scenes/prefabs/combatTriangle.tscn" id="3_n0leu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sh265"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n0leu"]
+radius = 0.1
+height = 0.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8cdkg"]
+radius = 0.1
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n0leu"]
+viewport_path = NodePath("triangleTarget/SubViewport")
+
+[sub_resource type="Animation" id="Animation_8cdkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_56dyf"]
+resource_name = "attack_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0), Vector3(-1.5707964, 2.8797934, 0), Vector3(-1.5707964, 2.0943954, 0), Vector3(-1.5707964, -2.9802322e-08, 0), Vector3(-1.5707964, -2.6179938, 0), Vector3(-1.5707964, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 0), Vector3(-0.8, 0, 0), Vector3(-0.49999994, 0, -1), Vector3(0, 0, -1.3), Vector3(0.9, 0, -0.29999995), Vector3(1, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_activate_left_collision"
+}, {
+"args": [],
+"method": &"_reset_collision"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jybep"]
+resource_name = "attack_left_leg"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 0), Vector3(-1, -0.8, 0), Vector3(0, 0, -1.4), Vector3(1, 0.4, -1.4), Vector3(1, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0), Vector3(-0.78539807, -2.3561945, 3.1415925), Vector3(-1.5707964, 0, 0), Vector3(-0.78539824, -0.7853982, -2.1073427e-08), Vector3(-1.5707964, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_activate_left_leg_collision"
+}, {
+"args": [],
+"method": &"_reset_collision"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_n0leu"]
+resource_name = "attack_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 0), Vector3(1, 0, -0.8), Vector3(-3.7252903e-08, 0, -0.8), Vector3(-0.7, 0, 0.19999999), Vector3(1, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0), Vector3(-1.5707964, -2.8797932, 0), Vector3(-1.5707964, 0, 0), Vector3(-1.5707964, 2.7052603, 0), Vector3(-1.5707964, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_activate_right_collision"
+}, {
+"args": [],
+"method": &"_reset_collision"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_50rl7"]
+resource_name = "attack_right_leg"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 0), Vector3(1, -0.5, 0), Vector3(0, 0, -1.4), Vector3(-1, 0.6, -1), Vector3(1, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0), Vector3(-0.8412487, 2.5830872, -3.138102), Vector3(-1.5707964, 0, 0), Vector3(-0.78539824, 0.7853982, 0), Vector3(-1.5707964, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_activate_right_leg_collision"
+}, {
+"args": [],
+"method": &"_reset_collision"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6v0jn"]
+resource_name = "attack_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0), Vector3(2.0943952, 0, 0), Vector3(2.3561945, 0, 0), Vector3(-2.0943952, 0, 0), Vector3(-1.5707964, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 0), Vector3(0, 1.3, 0), Vector3(0, 0.9999999, 0.6), Vector3(0, 0.099999845, -1.4), Vector3(1, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_activate_up_collision"
+}, {
+"args": [],
+"method": &"_push_forward"
+}, {
+"args": [],
+"method": &"_reset_collision"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6o77n"]
+resource_name = "pierce_attack"
+length = 0.26666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 0), Vector3(1, 0, 1), Vector3(0.19999999, 0, -1.5), Vector3(1, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_activate_pierce_colliison"
+}, {
+"args": [],
+"method": &"_reset_collision"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8cdkg"]
+_data = {
+&"RESET": SubResource("Animation_8cdkg"),
+&"attack_left": SubResource("Animation_56dyf"),
+&"attack_left_leg": SubResource("Animation_jybep"),
+&"attack_right": SubResource("Animation_n0leu"),
+&"attack_right_leg": SubResource("Animation_50rl7"),
+&"attack_up": SubResource("Animation_6v0jn"),
+&"pierce_attack": SubResource("Animation_6o77n")
+}
+
+[node name="player" type="CharacterBody3D" unique_id=1120512477]
+script = ExtResource("1_tou0u")
+
+[node name="body" type="MeshInstance3D" parent="." unique_id=1057642568]
+mesh = SubResource("CapsuleMesh_sh265")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="body" unique_id=1166565936]
+transform = Transform3D(0.54, 0, 0, 0, 0.54, 0, 0, 0, 0.54, 0, 0, -1)
+mesh = SubResource("BoxMesh_sh265")
+
+[node name="spearPivot" type="Node3D" parent="body" unique_id=1818381921]
+transform = Transform3D(0.99999946, 0, 0, 0, -4.3711356e-08, 0.99999964, 0, -0.9999993, -4.3711374e-08, 1, 0, 0)
+
+[node name="spear" type="CSGBox3D" parent="body/spearPivot" unique_id=300609105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+size = Vector3(0.1, 1.5, 0.1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="body/spearPivot" unique_id=1877296268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 3.0597974e-08)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body/spearPivot/StaticBody3D" unique_id=1223180497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, -7.1054274e-15)
+shape = SubResource("CapsuleShape3D_n0leu")
+debug_color = Color(0.81960785, 0, 0.14509805, 1)
+
+[node name="block" type="StaticBody3D" parent="body/spearPivot" unique_id=401976475]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -3.5527137e-15, 0, 0, 1, 0, 0.8000005, 3.4969123e-08)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body/spearPivot/block" unique_id=1238163635]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9487524e-13, 0, 2.9487524e-13, 1, 0, -0.05000019, -3.5527137e-15)
+shape = SubResource("CapsuleShape3D_8cdkg")
+debug_color = Color(0.40784314, 0.015686275, 0.6784314, 1)
+
+[node name="SpringArmPivot" type="Node3D" parent="." unique_id=1928278922]
+script = ExtResource("2_8cdkg")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1860946566]
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" unique_id=996455377]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1823339644]
+shape = SubResource("CapsuleShape3D_4flbx")
+
+[node name="triangleTarget" type="Sprite3D" parent="." unique_id=917882371]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_n0leu")
+
+[node name="SubViewport" type="SubViewport" parent="triangleTarget" unique_id=570236790]
+transparent_bg = true
+
+[node name="combatTriangle" parent="triangleTarget/SubViewport" unique_id=1875940445 instance=ExtResource("3_n0leu")]
+
+[node name="animators" type="Node" parent="." unique_id=1831352708]
+
+[node name="actionAnimator" type="AnimationPlayer" parent="animators" unique_id=670783824]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_8cdkg")
+
+[node name="timers" type="Node" parent="." unique_id=908542460]
+
+[node name="Timer" type="Timer" parent="timers" unique_id=455650647]
+
+[node name="parryTimer" type="Timer" parent="timers" unique_id=276373932]

@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cghaeypt67txe"]
+
+[ext_resource type="Script" uid="uid://cbhdc7mnr5rj6" path="res://scripts/combat_triangle.gd" id="1_rg87j"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_gimu0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_gvge1"]
+
+[node name="combatTriangle" type="Node2D" unique_id=1875940445]
+position = Vector2(250, 261.99994)
+scale = Vector2(20, 20)
+script = ExtResource("1_rg87j")
+
+[node name="bottomLeft" type="Node2D" parent="." unique_id=271734398]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="bottomLeft" unique_id=1916214723]
+position = Vector2(-5, 7)
+rotation = 0.61086524
+scale = Vector2(4, 8.5)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="bottomLeft" unique_id=1060299415]
+position = Vector2(-1.3721449, 1.8188858)
+rotation = 0.61086524
+scale = Vector2(4, -4.1499453)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="bottomRight" type="Node2D" parent="." unique_id=412760862]
+position = Vector2(0.14999962, 0.09999943)
+scale = Vector2(-1, 1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="bottomRight" unique_id=2106275375]
+position = Vector2(-5, 7)
+rotation = 0.61086524
+scale = Vector2(4, 8.5)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="bottomRight" unique_id=629373309]
+position = Vector2(-1.3721449, 1.8188858)
+rotation = 0.61086524
+scale = Vector2(4, -4.1499453)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="topRight" type="Node2D" parent="." unique_id=1640760495]
+position = Vector2(0.050001144, -0.15000057)
+rotation = 0.6981317
+scale = Vector2(-1, -1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="topRight" unique_id=1060580196]
+position = Vector2(-5, 7)
+rotation = 0.61086524
+scale = Vector2(4, 8.5)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="topRight" unique_id=1682581099]
+position = Vector2(-1.3721449, 1.8188858)
+rotation = 0.61086524
+scale = Vector2(4, -4.1499453)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="top" type="Node2D" parent="." unique_id=1706961587]
+position = Vector2(0.10000038, 0)
+rotation = 0.61784655
+scale = Vector2(1, -1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="top" unique_id=1483596607]
+position = Vector2(-5, 7)
+rotation = 0.61086524
+scale = Vector2(4, 8.5)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="top" unique_id=221273235]
+position = Vector2(-1.3721449, 1.8188858)
+rotation = 0.61086524
+scale = Vector2(4, -4.1499453)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="topLeft" type="Node2D" parent="." unique_id=464155852]
+rotation = -1.9198622
+scale = Vector2(-1, -1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="topLeft" unique_id=1342446420]
+position = Vector2(-5, 7)
+rotation = 0.61086524
+scale = Vector2(4, 8.5)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="topLeft" unique_id=669793160]
+position = Vector2(-1.3721449, 1.8188858)
+rotation = 0.61086524
+scale = Vector2(4, -4.1499453)
+mesh = SubResource("PrismMesh_gimu0")
+
+[node name="center" type="MeshInstance2D" parent="." unique_id=106035996]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(2, 2)
+mesh = SubResource("SphereMesh_gvge1")

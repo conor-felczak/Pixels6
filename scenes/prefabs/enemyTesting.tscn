@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://bnfuerebyvkf2"]
+
+[ext_resource type="Script" uid="uid://lfry1kefyony" path="res://scripts/enemy_testing.gd" id="1_wk5yv"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wk5yv"]
+points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4760704, 0.49888408, 0.16971254, 0.5591441, 0.46417162, 0.23105091, -0.8035912, 0.32045516, 0.40741014, 0.651043, -0.24352328, -0.4827893, 0.59484255, 0.082213186, -0.3628679, -0.68231165, 0.2896967, 0.46904355, -0.65452886, -0.06627126, -0.12744367, 0.8427015, -0.33810276, -0.39343542, -0.6839421, -0.24471663, 0.43825462, 0.62330925, 0.20084947, 0.0841477, 0.977454, 0.11479468, -0.06820232, -0.9764576, -0.12927033, 0.20054972, -0.56312895, -0.4514544, -0.18552664, 0.59545326, -0.4534751, -0.27336287, 0.59226835, 0.40775412, -0.0069364863, -0.47682306, 0.49966025, 0.37582088, -0.5886136, 0.31695515, 0.111579016, 0.5630594, -0.48117727, -0.41725034, 0.5278656, -0.27049688, -0.48454633, -0.59697217, -0.06650971, -0.27974695, 0.90856135, 0.05333608, -0.25019687, -0.8807117, 0.20531891, 0.263647, -0.90277094, -0.1273943, 0.29336792, 0.8715263, -0.15719566, 0.3734115, -0.5263189, -0.32824618, 0.4996626, 0.47664148, -0.0068885577, 0.053105574, 0.8750009, 0.32470253, -0.15454252, -0.5908538, 0.4658794, -0.09727988, -0.7823577, -0.39818847, -0.3876489, -0.49817133, 0.31564978, -0.30067965, -0.58799505, -0.38890144)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xvnn2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d3xwr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xvnn2"]
+radius = 0.6
+height = 2.09375
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dcexc"]
+radius = 0.1
+height = 0.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qxtuc"]
+radius = 0.1
+height = 1.7
+
+[node name="enemyTesting" type="CharacterBody3D" unique_id=1200794568 groups=["enemies"]]
+script = ExtResource("1_wk5yv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1070713903]
+shape = SubResource("ConvexPolygonShape3D_wk5yv")
+
+[node name="limbs" type="Node3D" parent="." unique_id=850888563]
+
+[node name="rightArm" type="MeshInstance3D" parent="limbs" unique_id=1405861676]
+transform = Transform3D(0.15999998, 0, 0, 0, 1, 0, 0, 0, 0.18, 0.70000005, -0.3, 0)
+mesh = SubResource("BoxMesh_xvnn2")
+
+[node name="leftArm" type="MeshInstance3D" parent="limbs" unique_id=1599639286]
+transform = Transform3D(0.15999998, 0, 0, 0, 1, 0, 0, 0, 0.18, -0.6999999, -0.3, 0)
+mesh = SubResource("BoxMesh_xvnn2")
+
+[node name="rightLeg" type="MeshInstance3D" parent="limbs" unique_id=2100859200]
+transform = Transform3D(0.15999998, 0, 0, 0, -4.371139e-08, 0.18, 0, -1, -7.86805e-09, 0.50000006, -0.90000004, -0.29999998)
+mesh = SubResource("BoxMesh_xvnn2")
+
+[node name="leftLeg" type="MeshInstance3D" parent="limbs" unique_id=1005165703]
+transform = Transform3D(0.15999998, 0, 0, 0, -4.371139e-08, 0.18, 0, -1, -7.86805e-09, -0.49999988, -0.90000004, -0.3)
+mesh = SubResource("BoxMesh_xvnn2")
+
+[node name="body" type="MeshInstance3D" parent="limbs" unique_id=538170810]
+mesh = SubResource("CapsuleMesh_d3xwr")
+
+[node name="limbsAreas" type="Node3D" parent="." unique_id=1148287872]
+
+[node name="body" type="Area3D" parent="limbsAreas" unique_id=1330316834]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="limbsAreas/body" unique_id=369977153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015625, 0)
+shape = SubResource("CapsuleShape3D_xvnn2")
+debug_color = Color(0.87058824, 0.7294118, 0.23529412, 1)
+
+[node name="leftArm" type="Area3D" parent="limbsAreas" unique_id=449593455]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="limbsAreas/leftArm" unique_id=1540630512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015625, 0)
+shape = SubResource("CapsuleShape3D_xvnn2")
+debug_color = Color(0.87058824, 0.7294118, 0.23529412, 1)
+
+[node name="rightArm" type="Area3D" parent="limbsAreas" unique_id=1691798723]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="limbsAreas/rightArm" unique_id=1276873992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015625, 0)
+shape = SubResource("CapsuleShape3D_xvnn2")
+debug_color = Color(0.87058824, 0.7294118, 0.23529412, 1)
+
+[node name="leftLeg" type="Area3D" parent="limbsAreas" unique_id=234911182]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="limbsAreas/leftLeg" unique_id=301022665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015625, 0)
+shape = SubResource("CapsuleShape3D_xvnn2")
+debug_color = Color(0.87058824, 0.7294118, 0.23529412, 1)
+
+[node name="rightLeg" type="Area3D" parent="limbsAreas" unique_id=531915853]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="limbsAreas/rightLeg" unique_id=1676659054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015625, 0)
+shape = SubResource("CapsuleShape3D_xvnn2")
+debug_color = Color(0.87058824, 0.7294118, 0.23529412, 1)
+
+[node name="up" type="Area3D" parent="limbsAreas" unique_id=1012722157]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="limbsAreas/up" unique_id=215363835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015625, 0)
+shape = SubResource("CapsuleShape3D_xvnn2")
+debug_color = Color(0.87058824, 0.7294118, 0.23529412, 1)
+
+[node name="spearPivot" type="Node3D" parent="." unique_id=983272165]
+transform = Transform3D(0.99999946, 0, 0, 0, -4.3711356e-08, 0.99999964, 0, -0.9999993, -4.3711374e-08, 0.7, 0, 0)
+
+[node name="sword" type="CSGBox3D" parent="spearPivot" unique_id=1173097128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+size = Vector3(0.1, 1.5, 0.1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="spearPivot" unique_id=624308391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 3.0597974e-08)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spearPivot/StaticBody3D" unique_id=262209779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, -7.1054274e-15)
+shape = SubResource("CapsuleShape3D_dcexc")
+debug_color = Color(0.81960785, 0, 0.14509805, 1)
+
+[node name="block" type="StaticBody3D" parent="spearPivot" unique_id=1932204276]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -3.5527137e-15, 0, 0, 1, 0, 0.8000005, 3.4969123e-08)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spearPivot/block" unique_id=1161512769]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9487524e-13, 0, 2.9487524e-13, 1, 0, -0.05000019, -3.5527137e-15)
+shape = SubResource("CapsuleShape3D_qxtuc")
+debug_color = Color(0.40784314, 0.015686275, 0.6784314, 1)
+
+[node name="animationPLayers" type="Node" parent="." unique_id=26717865]
+
+[node name="actionAnimator" type="AnimationPlayer" parent="animationPLayers" unique_id=1913648990]
+root_node = NodePath("../..")
+
+[connection signal="body_entered" from="limbsAreas/body" to="." method="_on_body_body_entered"]
+[connection signal="body_entered" from="limbsAreas/leftArm" to="." method="_on_left_arm_body_entered"]
+[connection signal="body_entered" from="limbsAreas/rightArm" to="." method="_on_right_arm_body_entered"]
+[connection signal="body_entered" from="limbsAreas/leftLeg" to="." method="_on_left_leg_body_entered"]
+[connection signal="body_entered" from="limbsAreas/rightLeg" to="." method="_on_right_leg_body_entered"]
+[connection signal="body_entered" from="limbsAreas/up" to="." method="_on_up_body_entered"]

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://6vqpc0twyvs3"]
+
+[ext_resource type="PackedScene" uid="uid://c32ix4c3rjajc" path="res://scenes/prefabs/player.tscn" id="1_5dfjd"]
+[ext_resource type="PackedScene" uid="uid://lhwurh8drrya" path="res://scenes/prefabs/triangle_target.tscn" id="2_7wuow"]
+[ext_resource type="PackedScene" uid="uid://bnfuerebyvkf2" path="res://scenes/prefabs/enemyTesting.tscn" id="3_sti2t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfgy1"]
+sky_top_color = Color(0.7271537, 0.46279687, 0.29202393, 1)
+sky_horizon_color = Color(0.84558296, 0.46176106, 0.21268943, 1)
+ground_bottom_color = Color(0.590669, 0.3426536, 0.18162525, 1)
+ground_horizon_color = Color(0.83736765, 0.45513833, 0.20402873, 1)
+
+[sub_resource type="Sky" id="Sky_0qjea"]
+sky_material = SubResource("ProceduralSkyMaterial_kfgy1")
+
+[sub_resource type="Environment" id="Environment_ltr7t"]
+background_mode = 2
+sky = SubResource("Sky_0qjea")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.7
+glow_strength = 1.41
+glow_bloom = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dfjd"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.62763536, 0.62763536, 0.62763536, 1)
+roughness = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5dfjd"]
+viewport_path = NodePath("triangleTarget/SubViewport")
+
+[node name="testingCombat" type="Node3D" unique_id=578238107]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=132944844]
+transform = Transform3D(-0.8660253, -0.43301278, 0.24999997, -0.35355347, 0.8838834, 0.30618626, -0.35355338, 0.17677678, -0.9185586, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=607942173]
+environment = SubResource("Environment_ltr7t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1916069230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(20, 0.5, 20)
+material = SubResource("StandardMaterial3D_5dfjd")
+
+[node name="player" parent="." unique_id=1120512477 instance=ExtResource("1_5dfjd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=504466013]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+visible = false
+light_energy = 10.0
+spot_range = 11.0
+spot_angle = 59.690563
+
+[node name="triangleTarget" parent="." unique_id=5871709 instance=ExtResource("2_7wuow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+texture = SubResource("ViewportTexture_5dfjd")
+
+[node name="enemyTesting" parent="." unique_id=1200794568 instance=ExtResource("3_sti2t")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -4)
