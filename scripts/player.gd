@@ -26,6 +26,7 @@ var _last_movement_direction := Vector3.BACK
 @onready var actionAnimator = $animators/actionAnimator
 @onready var spearBlock = $body/spearPivot/block
 @onready var parryTimer = $timers/parryTimer
+@onready var getBlockedCollision = $body/spearPivot/blockDetection/CollisionShape3D
 
 var aiming = false
 var targetting = false
@@ -37,6 +38,8 @@ var lockedOn = false
 func _ready() -> void:
 	_reset_collision()
 	targetTriangle.visible = false
+	
+	getBlockedCollision.disabled = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,6 +49,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("ui_q") and lockedOn:
 		lockedOn = false
+		_model.global_rotation.z = 0
+		_model.global_rotation.x = 0
 	elif Input.is_action_just_pressed("ui_q") and lockedOn == false:
 		lockedOn = true
 
@@ -124,8 +129,6 @@ func _physics_process(delta):
 		
 		if lockedOn:
 			_model.look_at(targetEnemy.global_position)
-			_model.global_rotation.z = 0
-			_model.global_rotation.x = 0
 		else:
 			_model.global_rotation.y = lerp_angle(_model.rotation.y, target_angle, rotation_speed * delta)
 
@@ -223,9 +226,9 @@ func _block_top_right(delta):
 	spearBlock.name = "blockTopRight"
 
 func _block_top_left(delta):
-	spearBlock.name = "blockTopLeft"
 	spearPivot.position = lerp(spearPivot.position, Vector3(-1, 0, 0), delta * 10)
 	spearPivot.rotation = Vector3(0, 0, 0)
+	spearBlock.name = "blockTopLeft"
 
 func _block_bottom_right(delta):
 	spearPivot.position = lerp(spearPivot.position, Vector3(1.3, -0.5, -0.3), delta * 10)
@@ -246,3 +249,16 @@ func _block_middle(delta):
 	spearPivot.position = lerp(spearPivot.position, Vector3(0.7, 0, 0), delta * 10)
 	spearPivot.rotation = Vector3(deg_to_rad(-90), 0, 0)
 	spearBlock.name = "blockMiddle"
+
+
+func _on_block_detection_body_entered(body: Node3D) -> void:
+	
+	print(body.name)
+	
+	if actionAnimator.current_animation == "attack_right" and body.name == "blockTopRight":
+		print("diediedie")
+		_screw_you_left()
+		
+
+func _screw_you_left():
+	actionAnimator.play("blocked_left")

@@ -4,7 +4,13 @@
 [ext_resource type="Script" uid="uid://c7os0sf880kp5" path="res://scripts/characterAiming.gd" id="2_8cdkg"]
 [ext_resource type="PackedScene" uid="uid://cghaeypt67txe" path="res://scenes/prefabs/combatTriangle.tscn" id="3_n0leu"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0leu"]
+diffuse_mode = 3
+specular_mode = 1
+roughness = 0.0
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
+material = SubResource("StandardMaterial3D_n0leu")
 
 [sub_resource type="BoxMesh" id="BoxMesh_sh265"]
 
@@ -46,6 +52,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(1, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/spearPivot/blockDetection/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_56dyf"]
@@ -182,6 +200,18 @@ tracks/2/keys = {
 "method": &"_reset_collision"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("body/spearPivot/blockDetection/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15, 0.32500002),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_50rl7"]
 resource_name = "attack_right_leg"
@@ -276,6 +306,34 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_r053x"]
+resource_name = "blocked_left"
+length = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/spearPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.05, 0.083333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.7, 0, -0.3), Vector3(-0.90000004, 0, 0), Vector3(-0.9000001, 0, 0.3), Vector3(-0.9000001, 0, 0.20000002)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/spearPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.05, 0.083333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5707964, 1.3089969, 0), Vector3(-1.5707964, 2.0943952, 0), Vector3(-1.5707964, 2.617994, 0), Vector3(-1.5707964, 2.5307276, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_6o77n"]
 resource_name = "pierce_attack"
 length = 0.26666668
@@ -317,6 +375,7 @@ _data = {
 &"attack_right": SubResource("Animation_n0leu"),
 &"attack_right_leg": SubResource("Animation_50rl7"),
 &"attack_up": SubResource("Animation_6v0jn"),
+&"blocked_left": SubResource("Animation_r053x"),
 &"pierce_attack": SubResource("Animation_6o77n")
 }
 
@@ -331,7 +390,7 @@ transform = Transform3D(0.54, 0, 0, 0, 0.54, 0, 0, 0, 0.54, 0, 0, -1)
 mesh = SubResource("BoxMesh_sh265")
 
 [node name="spearPivot" type="Node3D" parent="body" unique_id=1818381921]
-transform = Transform3D(0.99999946, 0, 0, 0, -4.3711356e-08, 0.99999964, 0, -0.9999993, -4.3711374e-08, 1, 0, 0)
+transform = Transform3D(0.9999994, 0, 0, 0, -4.3711363e-08, 0.99999976, 0, -0.9999994, -4.3711378e-08, 1, 0, 0)
 
 [node name="spear" type="CSGBox3D" parent="body/spearPivot" unique_id=300609105]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
@@ -349,13 +408,23 @@ debug_color = Color(0.81960785, 0, 0.14509805, 1)
 
 [node name="block" type="StaticBody3D" parent="body/spearPivot" unique_id=401976475]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -3.5527137e-15, 0, 0, 1, 0, 0.8000005, 3.4969123e-08)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 1024
+collision_mask = 1024
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="body/spearPivot/block" unique_id=1238163635]
 transform = Transform3D(1, 0, 0, 0, 1, -2.9487524e-13, 0, 2.9487524e-13, 1, 0, -0.05000019, -3.5527137e-15)
 shape = SubResource("CapsuleShape3D_8cdkg")
-debug_color = Color(0.40784314, 0.015686275, 0.6784314, 1)
+debug_color = Color(0.40784314, 1, 0.6784314, 1)
+
+[node name="blockDetection" type="Area3D" parent="body/spearPivot" unique_id=1545482849]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -3.5527137e-15, 0, 0, 1, 0, 0.8000005, 3.4969123e-08)
+collision_layer = 2048
+collision_mask = 2048
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body/spearPivot/blockDetection" unique_id=1709848105]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9487524e-13, 0, 2.9487524e-13, 1, 0, -0.05000019, -3.5527137e-15)
+shape = SubResource("CapsuleShape3D_8cdkg")
+debug_color = Color(0.40784314, 1, 0.6784314, 1)
 
 [node name="SpringArmPivot" type="Node3D" parent="." unique_id=1928278922]
 script = ExtResource("2_8cdkg")
@@ -390,3 +459,5 @@ libraries/ = SubResource("AnimationLibrary_8cdkg")
 [node name="Timer" type="Timer" parent="timers" unique_id=455650647]
 
 [node name="parryTimer" type="Timer" parent="timers" unique_id=276373932]
+
+[connection signal="body_entered" from="body/spearPivot/blockDetection" to="." method="_on_block_detection_body_entered"]

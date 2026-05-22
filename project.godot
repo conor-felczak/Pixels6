@@ -127,6 +127,7 @@ ui_click={
 3d_physics/layer_8="leftLeg"
 3d_physics/layer_9="rightLeg"
 3d_physics/layer_10="up"
+3d_physics/layer_12="enemyBlock"
 
 [physics]
 
