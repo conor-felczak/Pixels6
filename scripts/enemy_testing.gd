@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Enemy
 
 @export var leftArm := 10
 @export var rightArm := 10
